@@ -1,4 +1,4 @@
-name: Deploy Web App to GitHub Pages
+name: Deploy Mobile Tracker to GitHub Pages
 
 on:
   push:
@@ -20,7 +20,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Checkout Code
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -28,6 +28,6 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
-      - name: Deploy to GitHub Pages
+      - name: Deploy Site
         id: deployment
         uses: actions/deploy-pages@v4
