@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prioritizer & Tracker</title>
+
+  <!-- Tailwind CSS & Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    /* Custom scrollbar for mobile task matrices */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen pb-20 md:pb-6 font-sans">
+
+  <!-- Mobile Header -->
+  <header class="sticky top-0 z-50 bg-slate-800/90 backdrop-blur-md border-b border-slate-700 px-4 py-3 flex justify-between items-center">
+    <div class="flex items-center space-x-2">
+      <i data-lucide="target" class="w-6 h-6 text-indigo-400"></i>
+      <h1 class="font-bold text-lg text-white">Pace Tracker</h1>
+    </div>
+    <div id="current-date" class="text-xs text-slate-400 font-mono bg-slate-900 px-2 py-1 rounded"></div>
+  </header>
+
+  <!-- Main View Container -->
+  <main class="max-w-6xl mx-auto p-4 space-y-6">
+
+    <!-- TAB 1: DASHBOARD -->
+    <section id="tab-dashboard" class="space-y-4">
+      <h2 class="text-xl font-bold flex items-center gap-2 text-indigo-400">
+        <i data-lucide="layout-dashboard" class="w-5 h-5"></i> Tracker Dashboard
+      </h2>
+      
+      <!-- Pace Progress Cards Grid -->
+      <div id="pace-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Rendered via app.js -->
+      </div>
+
+      <!-- Monthly Trend Table -->
+      <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 shadow-lg">
+        <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Historical Monthly Pace Comparison</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="text-xs text-slate-400 border-b border-slate-700">
+              <tr>
+                <th class="py-2 px-3">Pace Group</th>
+                <th class="py-2 px-3 text-right">30 April</th>
+                <th class="py-2 px-3 text-right">31 May</th>
+                <th class="py-2 px-3 text-right">Current Target</th>
+              </tr>
+            </thead>
+            <tbody id="dashboard-trend-body" class="divide-y divide-slate-700"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: MY PRIORITIZER -->
+    <section id="tab-prioritizer" class="space-y-4 hidden">
+      <h2 class="text-xl font-bold flex items-center gap-2 text-indigo-400">
+        <i data-lucide="list-checks" class="w-5 h-5"></i> My Prioritizer
+      </h2>
+
+      <!-- Prioritizer Metrics Grid -->
+      <div id="prioritizer-summary" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+
+      <!-- Mobile Scrollable Daily Task Log -->
+      <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 shadow-lg">
+        <div class="flex justify-between items-center mb-3">
+          <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-wider">Daily Execution Matrix</h3>
+          <span class="text-xs text-indigo-400">Swipe horizontally &rarr;</span>
+        </div>
+        <div class="overflow-x-auto no-scrollbar">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-900/50 text-slate-300">
+              <tr id="task-matrix-header"></tr>
+            </thead>
+            <tbody id="task-matrix-body" class="divide-y divide-slate-700"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: SOURCES TRACKER -->
+    <section id="tab-sources" class="space-y-4 hidden">
+      <h2 class="text-xl font-bold flex items-center gap-2 text-indigo-400">
+        <i data-lucide="users" class="w-5 h-5"></i> Sources Tracker
+      </h2>
+      <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 shadow-lg overflow-x-auto">
+        <table class="w-full text-left text-xs whitespace-nowrap">
+          <thead class="text-slate-400 border-b border-slate-700 uppercase">
+            <tr>
+              <th class="py-2 px-3">Team / Source</th>
+              <th class="py-2 px-3 text-center">Done</th>
+              <th class="py-2 px-3 text-center">Dues</th>
+              <th class="py-2 px-3 text-center">Pace</th>
+              <th class="py-2 px-3 text-center">Status</th>
+              <th class="py-2 px-3 text-center">Daily Target</th>
+            </tr>
+          </thead>
+          <tbody id="sources-list" class="divide-y divide-slate-700"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Mobile Touch Navigation Bar -->
+  <nav class="fixed bottom-0 left-0 right-0 bg-slate-800/95 backdrop-blur-md border-t border-slate-700 py-2 px-6 flex justify-around items-center z-50">
+    <button onclick="switchTab('dashboard')" id="nav-dashboard" class="flex flex-col items-center text-indigo-400 text-xs">
+      <i data-lucide="layout-dashboard" class="w-5 h-5 mb-1"></i> Dashboard
+    </button>
+    <button onclick="switchTab('prioritizer')" id="nav-prioritizer" class="flex flex-col items-center text-slate-400 text-xs">
+      <i data-lucide="list-checks" class="w-5 h-5 mb-1"></i> Prioritizer
+    </button>
+    <button onclick="switchTab('sources')" id="nav-sources" class="flex flex-col items-center text-slate-400 text-xs">
+      <i data-lucide="users" class="w-5 h-5 mb-1"></i> Sources
+    </button>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>
