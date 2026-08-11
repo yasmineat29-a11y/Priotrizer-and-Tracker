@@ -1,33 +1,14 @@
 {
   "year": 2026,
   "paces": [
-    { "id": "pace1", "name": "Tasks of Pace 1", "description": "High priority client audits and urgent deliverables", "dues": 28, "apr": 0.40, "may": 0.60 },
-    { "id": "pace2", "name": "Tasks of Pace 2", "description": "Weekly recurring operations and venue checks", "dues": 80, "apr": 0.42, "may": 0.50 },
-    { "id": "pace4", "name": "Tasks of Pace 4", "description": "Bi-weekly reporting and source coordination", "dues": 17, "apr": 0.50, "may": 0.76 },
-    { "id": "pace5", "name": "Tasks of Pace 5", "description": "Monthly reviews and long-term targets", "dues": 10, "apr": 0.90, "may": 0.63 }
+    { "id": "pace1", "name": "Pace 1", "description": "", "dues": null }
   ],
   "tasks": [
-    { "id": "t1", "name": "task of pace 1 (name)", "paceId": "pace1" },
-    { "id": "t2", "name": "task of pace 1 (name)", "paceId": "pace1" },
-    { "id": "t3", "name": "task of pace 2 (name)", "paceId": "pace2" },
-    { "id": "t4", "name": "task of pace 2 (name)", "paceId": "pace2" },
-    { "id": "t5", "name": "task of pace 4 (name)", "paceId": "pace4" },
-    { "id": "t6", "name": "task of pace 5 (name)", "paceId": "pace5" }
+    { "id": "t1", "name": "Task 1", "paceId": "pace1" }
   ],
   "sources": [
-    { "id": "s1", "name": "source 1 (name)", "dues": 0 },
-    { "id": "s2", "name": "source 2 (name)", "dues": 0 },
-    { "id": "s3", "name": "source 3 (name)", "dues": 24 },
-    { "id": "s4", "name": "source 4 (name)", "dues": 24 },
-    { "id": "s5", "name": "source 5 (name)", "dues": 24 },
-    { "id": "s6", "name": "source 6 (name)", "dues": 24 }
+    { "id": "s1", "name": "Source 1", "dues": null }
   ],
-  "prioritizerGrid": {
-    "2026-08-01": { "t1": 2, "t3": 3 },
-    "2026-08-02": { "t2": 1, "t4": 2 }
-  },
-  "sourcesGrid": {
-    "t1": { "s3": 2, "s6": 1 },
-    "t3": { "s4": 1, "s5": 3 }
-  }
+  "prioritizerGrid": {},
+  "sourcesGrid": {}
 }
